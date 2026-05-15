@@ -72,7 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signInWithGithub = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
-      options: { redirectTo: `${window.location.origin}/auth/callback` }
+      options: { redirectTo: `${window.location.origin}/?auth_callback=github` }
     });
     return { error: error as Error | null };
   };
@@ -80,7 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `${window.location.origin}/auth/callback` }
+      options: { redirectTo: `${window.location.origin}/?auth_callback=google` }
     });
     return { error: error as Error | null };
   };
