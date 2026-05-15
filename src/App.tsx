@@ -3,6 +3,8 @@
  * Auth: Supabase | Payments: Stripe | Backend: Outplane
  */
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SessionViewer from './pages/SessionViewer';
 import React, { useState, useEffect } from 'react';
 import {
   Terminal, TerminalSquare, Share2, Users, ShieldCheck, EyeOff,
