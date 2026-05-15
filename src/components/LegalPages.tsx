@@ -1,6 +1,10 @@
 import React from 'react';
-import { Card } from '../App';
 import { Shield, Lock, Fingerprint, RefreshCcw, Eye, Database } from 'lucide-react';
+
+// Define Card locally since it's not exported from App
+const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`bg-smokey-carbon border border-cool-stone rounded-lg p-6 ${className}`}>{children}</div>
+);
 
 const LegalLayout = ({ title, children, lastUpdated }: { title: string, children: React.ReactNode, lastUpdated: string }) => (
     <div className="py-24 px-6 max-w-4xl mx-auto min-h-screen">
@@ -18,19 +22,19 @@ export const PrivacyPolicyPage = () => (
     <LegalLayout title="Privacy Policy" lastUpdated="January 2026">
         <section className="space-y-4">
             <h2 className="text-2xl font-bold">What we collect</h2>
-            <p>When you create an account we collect your email address and name. When you use CoShell we collect data about your sessions — such as start time, end time, duration, and viewer count. If you enable session recording, the terminal output is stored encrypted on our servers. We do not sell your data to anyone.</p>
+            <p>When you create an account we collect your email address and name. When you use CoShell we collect data about your sessions — such as start time, end time, duration, and viewer count.</p>
         </section>
         <section className="space-y-4">
             <h2 className="text-2xl font-bold">How we use your data</h2>
-            <p>We use your email for account-related communications — welcome emails, trial reminders, and billing. We use session metadata to power your dashboard. We use analytics data to improve the product.</p>
+            <p>We use your email for account-related communications — welcome emails, trial reminders, and billing. We use session metadata to power your dashboard. We use analytics data to improve our service.</p>
         </section>
         <section className="space-y-4">
             <h2 className="text-2xl font-bold">Data storage and security</h2>
-            <p>Session recordings are stored encrypted on Cloudflare R2 infrastructure. Account data is stored in our database hosted on Supabase. All data in transit is encrypted via TLS. We do not have access to your live terminal sessions beyond what is captured in recordings — and recordings are deleted automatically based on your plan.</p>
+            <p>Session recordings are stored encrypted on Cloudflare R2 infrastructure. Account data is stored in our database hosted on Supabase. All data in transit is encrypted via TLS. We do not sell or rent your data.</p>
         </section>
         <section className="space-y-4">
              <h2 className="text-2xl font-bold">Third parties</h2>
-             <p>We use Stripe for payment processing, Cloudflare for storage, Supabase for our database, Resend for email, and PostHog for analytics. Each of these services has their own privacy policy.</p>
+             <p>We use Stripe for payment processing, Cloudflare for storage, Supabase for our database, Resend for email, and PostHog for analytics. Each of these services has their own privacy policies.</p>
         </section>
         <div className="mt-12 p-6 bg-smokey-carbon rounded-lg border border-cool-stone">
             <p className="text-sm font-bold text-chartreuse-zap mb-2">Need to export or delete your data?</p>
@@ -47,15 +51,15 @@ export const TermsOfServicePage = () => (
         </section>
         <section className="space-y-4">
             <h2 className="text-2xl font-bold">Acceptable use</h2>
-            <p>You may not use CoShell to share access to systems you do not own or have explicit permission to access. You may not use CoShell for any illegal purpose. You may not attempt to reverse engineer, exploit, or disrupt the CoShell infrastructure.</p>
+            <p>You may not use CoShell to share access to systems you do not own or have explicit permission to access. You may not use CoShell for any illegal purpose. You may not attempt to reverse engineer or copy CoShell.</p>
         </section>
         <section className="space-y-4">
             <h2 className="text-2xl font-bold">Payment and billing</h2>
-            <p>Paid plans are billed monthly or annually in advance. If a payment fails we will notify you and give you a grace period before suspending your account. We do not offer refunds except at our discretion within the first 7 days of a paid plan.</p>
+            <p>Paid plans are billed monthly or annually in advance. If a payment fails we will notify you and give you a grace period before suspending your account. We do not offer refunds except as required by law.</p>
         </section>
         <section className="space-y-4">
             <h2 className="text-2xl font-bold">Limitation of liability</h2>
-            <p>CoShell is provided as-is. We are not liable for any damages resulting from your use of the service, including but not limited to data loss, service interruptions, or unauthorized access to your sessions.</p>
+            <p>CoShell is provided as-is. We are not liable for any damages resulting from your use of the service, including but not limited to data loss, service interruptions, or unauthorized access.</p>
         </section>
     </LegalLayout>
 );
@@ -86,7 +90,7 @@ export const SecurityPage = () => (
 
         <div className="bg-smokey-carbon p-12 rounded-2xl border border-cool-stone border-dashed text-center">
             <h2 className="text-2xl font-bold mb-4">Responsible Disclosure</h2>
-            <p className="text-silken-whisper max-w-2xl mx-auto mb-8">If you discover a security vulnerability in CoShell, please email us at <span className="text-chartreuse-zap underline">security@coshell.io</span>. We respond within 48 hours.</p>
+            <p className="text-silken-whisper max-w-2xl mx-auto mb-8">If you discover a security vulnerability in CoShell, please email us at <span className="text-chartreuse-zap underline">security@coshell.io</span></p>
             <div className="text-xs text-muted-ash">Note: We do not currently offer a bug bounty program but deeply appreciate responsible disclosure.</div>
         </div>
     </div>
