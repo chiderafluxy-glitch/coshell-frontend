@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-midnight-oil: #151515;
+  --color-smokey-carbon: #1f1f1c;
+  --color-deep-graphite: #282828;
+  --color-iron-oxide: #343434;
+  --color-cool-stone: #3a3a3a;
+  --color-muted-ash: #414141;
+  --color-shadow-white: #a0a0a0;
+  --color-cloud-white: #ffffff;
+  --color-highlight-silver: #dfdfdf;
+  --color-silken-whisper: #bcbcbb;
+  --color-border-light: #e5e7eb;
+  --color-chartreuse-zap: #faff69;
+  --color-veridian-stroke: #4f5100;
+  --color-emerald-glint: #fbff46;
+  --color-alert-red: #ff7575;
+
+  /* Typography */
+  --font-inter: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-basier: "Basier", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-inconsolata: "Inconsolata", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Radius */
+  --radius-tags: 4px;
+  --radius-cards: 8px;
+  --radius-buttons: 9999px;
+  --radius-inputfield: 4px;
+
+  /* Shadows */
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-sm-inset: inset 0 4px 25px 0 rgba(0, 0, 0, 0.14), 0 4px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+@layer base {
+  body {
+    @apply bg-midnight-oil text-cloud-white font-inter;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Inconsolata:wght@600&display=swap');
+
+/* Fallback for Basier - usually a custom font, using Inter bold/black as proxy if not available via URL */
+@font-face {
+  font-family: 'Basier';
+  src: local('Inter');
+  font-weight: 600;
+}
+
+.halo-gradient {
+  background: linear-gradient(to right, rgba(250, 255, 105, 0), rgb(250, 255, 105), rgba(250, 255, 105, 0));
+}
+
+.terminal-window {
+  @apply bg-smokey-carbon border border-cool-stone rounded-lg overflow-hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-midnight-oil;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-muted-ash rounded-full;
+}

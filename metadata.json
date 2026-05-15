@@ -1,0 +1,6 @@
+{
+  "name": "CoShell",
+  "description": "Zero-config terminal sharing for developers and remote teams. Share live terminal sessions in seconds.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
