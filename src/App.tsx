@@ -20,11 +20,12 @@ import {
 } from './lib/api';
 import { FeaturesPage, HowItWorksPage, PricingPage } from './components/MarketingPages';
 import { ChangelogPage, DocsPage } from './components/CompanyPages';
+import { AuthCallbackPage } from './pages/AuthCallbackPage';
 import { PrivacyPolicyPage, TermsOfServicePage, SecurityPage } from './components/LegalPages';
 
 // ── Types ─────────────────────────────────────────────────────
 type View =
-  | 'LANDING' | 'SIGNUP' | 'LOGIN' | 'PLAN_SELECT' | 'ONBOARDING' | 'DASHBOARD'
+  | 'LANDING' | 'SIGNUP' | 'LOGIN' | 'OAUTH_CALLBACK' | 'PLAN_SELECT' | 'ONBOARDING' | 'DASHBOARD'
   | 'FEATURES' | 'HOW_IT_WORKS' | 'PRICING' | 'CHANGELOG' | 'DOCS'
   | 'PRIVACY' | 'TERMS' | 'SECURITY';
 type DashboardTab = 'SESSIONS' | 'RECORDINGS' | 'SNIPPETS' | 'NOTIFICATIONS' | 'TEAM' | 'BILLING' | 'SETTINGS';
@@ -483,11 +484,17 @@ function AppInner() {
   const { user, profile, loading } = useAuth();
   const [view, setView] = useState<View>('LANDING');
 
-  // Detect if we're on auth callback URL and stay on LOGIN
+  // Handle OAuth callback
   useEffect(() => {
-    const isAuthCallback = window.location.pathname.includes('auth/callback');
-    if (isAuthCallback && view === 'LANDING') {
-      setView('LOGIN');
+    // Check if we're on an OAuth callback URL
+    const hash = window.location.hash;
+    const search = window.location.search;
+    
+    // Supabase OAuth sets the session in the URL hash (#access_token=...)
+    if (hash.includes('access_token') || hash.includes('code')) {
+      setView('OAUTH_CALLBACK');
+      // Clean up the URL
+      window.history.replaceState({}, '', window.location.pathname);
     }
   }, []);
 
@@ -522,6 +529,7 @@ function AppInner() {
         {view === 'LANDING' && <LandingPage setView={setView} />}
         {view === 'SIGNUP' && <SignupPage setView={setView} />}
         {view === 'LOGIN' && <LoginPage setView={setView} />}
+        {view === 'OAUTH_CALLBACK' && <AuthCallbackPage setView={setView} />}
         {view === 'PLAN_SELECT' && <PlanSelectPage setView={setView} />}
         {view === 'ONBOARDING' && <OnboardingPage onComplete={() => setView('DASHBOARD')} />}
         {view === 'DASHBOARD' && (user ? <Dashboard setView={setView} /> : <LoginPage setView={setView} />)}
