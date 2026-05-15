@@ -13,14 +13,18 @@ import {
   Lock,
   Cloud
 } from 'lucide-react';
-import { Card } from '../App';
+
+// Define Card locally since it's not exported from App
+const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`bg-smokey-carbon border border-cool-stone rounded-lg p-6 ${className}`}>{children}</div>
+);
 
 export const ChangelogPage = () => {
     return (
         <div className="py-24 px-6 max-w-4xl mx-auto">
             <div className="text-center mb-24">
-                <h1 className="text-5xl font-basier font-bold mb-6">What’s new in CoShell.</h1>
-                <p className="text-xl text-shadow-white mb-8">We ship every week. Here’s what we’ve been building.</p>
+                <h1 className="text-5xl font-basier font-bold mb-6">What's new in CoShell.</h1>
+                <p className="text-xl text-shadow-white mb-8">We ship every week. Here's what we've been building.</p>
                 <div className="flex max-w-md mx-auto items-center">
                     <input placeholder="Get notified when we ship" className="flex-1 bg-smokey-carbon border border-cool-stone rounded-l-full py-3 px-6 outline-none focus:border-chartreuse-zap" />
                     <button className="bg-chartreuse-zap text-midnight-oil px-6 py-3 rounded-r-full font-bold">Subscribe</button>
@@ -29,8 +33,8 @@ export const ChangelogPage = () => {
 
             <div className="space-y-16">
                 {[
-                    { version: "v1.2.4", date: "October 14, 2026", title: "Two-Cursor Collaboration & Custom Redaction", items: ["Added visual cursors for viewers in read-write sessions.", "Introducing support for custom regex patterns in secret redaction.", "Improved terminal resize performance on high-latency connections."] },
-                    { version: "v1.2.3", date: "October 7, 2026", title: "Slack Webhook Enhancements", items: ["Added toggle for specific Slack event notifications.", "Fixed bug where agent would occasionally disconnect during sleep.", "New 'Peek Mode' visual indicator in terminal viewer."] }
+                    { version: "v1.2.4", date: "October 14, 2026", title: "Two-Cursor Collaboration & Custom Redaction", items: ["Added visual cursors for viewers in read-write sessions.", "Introduced custom regex patterns for secret redaction.", "Fixed bug where agent would timeout on large outputs."] },
+                    { version: "v1.2.3", date: "October 7, 2026", title: "Slack Webhook Enhancements", items: ["Added toggle for specific Slack event notifications.", "Fixed bug where agent would disconnect after 24 hours.", "Improved terminal performance for large recordings."] },
                 ].map((entry, idx) => (
                     <div key={idx} className="relative pl-12 border-l border-cool-stone">
                         <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-chartreuse-zap border-4 border-midnight-oil shadow-[0_0_10px_rgba(250,255,105,0.5)]" />
