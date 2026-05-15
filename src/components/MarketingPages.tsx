@@ -19,7 +19,12 @@ import {
   Check,
   Slack
 } from 'lucide-react';
-import { Button, Card } from '../App';
+import { Btn } from '../App';
+
+// Define Card locally since it's not exported from App
+const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`bg-smokey-carbon border border-cool-stone rounded-lg p-6 ${className}`}>{children}</div>
+);
 
 export const FeaturesPage = () => {
   const sections = [
@@ -28,7 +33,7 @@ export const FeaturesPage = () => {
       features: [
         {
           name: "Instant Terminal Sharing",
-          desc: "One click on the host machine generates a unique shareable URL. Anyone with that link can open your terminal in their browser instantly. No SSH keys. No port forwarding. No VPN. No firewall rules. Just a link."
+          desc: "One click on the host machine generates a unique shareable URL. Anyone with that link can open your terminal in their browser instantly. No SSH keys. No port forwarding. No VPN. No setup.",
         },
         {
           name: "Read-Only and Read-Write Links",
@@ -49,7 +54,7 @@ export const FeaturesPage = () => {
         },
         {
           name: "Two-Cursor Collaboration",
-          desc: "Viewers drop a colored cursor to point at lines. Host sees all cursors. Feels like pointing over someone’s shoulder."
+          desc: "Viewers drop a colored cursor to point at lines. Host sees all cursors. Feels like pointing over someone's shoulder."
         },
         {
           name: "Built-In Chat Sidebar",
@@ -102,7 +107,7 @@ export const FeaturesPage = () => {
             <div className="grid md:grid-cols-2 gap-12">
                 <div className="space-y-4">
                     <h3 className="text-xl font-bold text-cloud-white">Automatic Session Recording</h3>
-                    <p className="text-silken-whisper leading-relaxed">Recorded automatically from the start. Stored in asciinema format in cloud storage. Play back, download, or share as a replay link.</p>
+                    <p className="text-silken-whisper leading-relaxed">Recorded automatically from the start. Stored in asciinema format in cloud storage. Play back, download, or share as a replay.</p>
                 </div>
                 <div className="space-y-4">
                     <h3 className="text-xl font-bold text-cloud-white">Session Replay & Bookmarks</h3>
@@ -155,7 +160,7 @@ export const HowItWorksPage = () => {
         {steps.map((step, i) => (
           <div key={i} className="flex gap-12 group">
             <div className="flex flex-col items-center">
-              <div className="w-12 h-12 rounded-full border-2 border-chartreuse-zap flex items-center justify-center font-basier font-bold text-chartreuse-zap text-xl group-hover:bg-chartreuse-zap group-hover:text-midnight-oil transition-all shrink-0">
+              <div className="w-12 h-12 rounded-full border-2 border-chartreuse-zap flex items-center justify-center font-basier font-bold text-chartreuse-zap text-xl group-hover:bg-chartreuse-zap group-hover:text-midnight-oil transition-all">
                 {i + 1}
               </div>
               {i < steps.length - 1 && <div className="w-px flex-1 bg-cool-stone my-4" />}
@@ -218,15 +223,15 @@ export const PricingPage = () => {
                             className="w-4 h-4 bg-chartreuse-zap rounded-full shadow-[0_0_8px_rgba(250,255,105,0.5)]" 
                         />
                     </button>
-                    <span className={isAnnual ? 'text-cloud-white' : 'text-muted-ash'}>Annual <span className="text-[10px] bg-chartreuse-zap text-midnight-oil px-1.5 py-0.5 rounded ml-1 font-bold">SAVE 10%</span></span>
+                    <span className={isAnnual ? 'text-cloud-white' : 'text-muted-ash'}>Annual <span className="text-[10px] bg-chartreuse-zap text-midnight-oil px-1.5 py-0.5 rounded ml-1 font-bold">Save 10%</span></span>
                 </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
                 {[
-                    { name: "Basic", price: isAnnual ? 13.5 : 15, features: ["1 viewer / session", "7-day recording retention", "Chat sidebar", "60-second instant replay", "Save to Gist", "Browser push"] },
-                    { name: "Pro", price: isAnnual ? 22.5 : 25, popular: true, features: ["Up to 5 viewers", "30-day recording retention", "Command whitelist", "Secret redaction", "Two-cursor collaboration", "Slack & Email alerts"] },
-                    { name: "Elite", price: isAnnual ? 45 : 50, features: ["Up to 20 viewers", "1-year recording retention", "Multi-session broadcast", "AI session summaries", "SSO / SAML", "Audit logs"] }
+                    { name: "Basic", price: isAnnual ? 13.5 : 15, features: ["1 viewer / session", "7-day recording retention", "Chat sidebar", "60-second instant replay", "Save to Gist", "Browse documentation"] },
+                    { name: "Pro", price: isAnnual ? 22.5 : 25, popular: true, features: ["Up to 5 viewers", "30-day recording retention", "Command whitelist", "Secret redaction", "Two-cursor collab", "Email + Slack", "Priority support"] },
+                    { name: "Elite", price: isAnnual ? 45 : 50, features: ["Up to 20 viewers", "1-year recording retention", "Multi-session broadcast", "AI session summaries", "SSO / SAML", "Audit logs", "Custom branding"] },
                 ].map((plan, i) => (
                     <Card key={i} className={`flex flex-col relative ${plan.popular ? 'border-chartreuse-zap ring-1 ring-chartreuse-zap' : ''}`}>
                         {plan.popular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-chartreuse-zap text-midnight-oil text-[10px] font-bold px-3 py-1 rounded-full uppercase">Most Popular</div>}
@@ -245,14 +250,14 @@ export const PricingPage = () => {
                                 </li>
                             ))}
                         </ul>
-                        <Button variant={plan.popular ? 'primary' : 'secondary'} className="w-full py-4">Get Started</Button>
+                        <Btn variant={plan.popular ? 'primary' : 'secondary'} className="w-full py-4">Get Started</Btn>
                     </Card>
                 ))}
             </div>
             <div className="mt-24 bg-smokey-carbon p-12 rounded-2xl border border-cool-stone text-center max-w-4xl mx-auto">
                 <h3 className="text-3xl font-basier font-bold mb-4">Enterprise</h3>
                 <p className="text-silken-whisper mb-8">Need something beyond Elite? We offer custom contracts, dedicated infrastructure, on-premise deployment, and white-glove onboarding.</p>
-                <Button className="mx-auto px-12 py-4">Talk to Us</Button>
+                <Btn className="mx-auto px-12 py-4">Talk to Us</Btn>
             </div>
 
             <div className="mt-32 max-w-4xl mx-auto">
