@@ -934,10 +934,10 @@ function AppInner() {
   const { user, profile, loading } = useAuth();
   const [view, setView] = useState<View>('LANDING');
 
-  // Handle Stripe return
+  // Handle Stripe return & Auth callback
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
-    if (p.get('session_id')) {
+    if (p.get('session_id') || p.get('auth_callback')) {
       window.history.replaceState({}, '', window.location.pathname);
       if (user) setView('ONBOARDING');
     }
